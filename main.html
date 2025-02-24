@@ -1,16 +1,122 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <div class="container mt-5">
+        <h2 class="text-center">Internship Form</h2>
+        <form id="internship-form" class="needs-validation" novalidate>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="first-name-input" class="form-label">First Name</label>
+                    <input type="text" id="first-name-input" class="form-control" required>
+                    <div class="error" id="first-name-error">First name required!</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="last-name-input" class="form-label">Last Name</label>
+                    <input type="text" id="last-name-input" class="form-control" required>
+                    <div class="error" id="last-name-error">Last name required!</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="email-input" class="form-label">Email Address</label>
+                    <input type="email" id="email-input" class="form-control" required>
+                    <div class="error" id="email-error">Email required!</div>
+                </div>
+            </div>
 
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <label for="college-input" class="form-label">College</label>
+                    <input type="text" id="college-input" class="form-control" required>
+                    <div class="error" id="college-error">Please provide a valid college.</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="graduation-year-input" class="form-label">Graduation Year</label>
+                    <select id="graduation-year-input" class="form-select" required>
+                        <option value="">Choose...</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+                    <div class="error" id="graduation-year-error">Please select a valid Graduation Year.</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="roll-no-input" class="form-label">Roll No.</label>
+                    <input type="text" id="roll-no-input" class="form-control" required>
+                    <div class="error" id="roll-no-error">Please provide a valid Roll no.</div>
+                </div>
+            </div>
+
+            <div class="form-check mt-3">
+                <input type="checkbox" id="conditions-checkbox" class="form-check-input" required>
+                <label for="conditions-checkbox" class="form-check-label">Agree to terms and conditions</label>
+                <div class="error" id="conditions-error">You must agree before submitting.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Submit form</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("internship-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let valid = true;
+
+            function validateField(id, errorId) {
+                let field = document.getElementById(id);
+                let error = document.getElementById(errorId);
+                if (!field.value.trim()) {
+                    error.style.display = "block";
+                    valid = false;
+                } else {
+                    error.style.display = "none";
+                }
+            }
+
+            validateField("first-name-input", "first-name-error");
+            validateField("last-name-input", "last-name-error");
+            validateField("email-input", "email-error");
+            validateField("college-input", "college-error");
+            validateField("roll-no-input", "roll-no-error");
+
+            let graduationYear = document.getElementById("graduation-year-input");
+            let graduationYearError = document.getElementById("graduation-year-error");
+            if (!graduationYear.value) {
+                graduationYearError.style.display = "block";
+                valid = false;
+            } else {
+                graduationYearError.style.display = "none";
+            }
+
+            let termsCheckbox = document.getElementById("conditions-checkbox");
+            let termsError = document.getElementById("conditions-error");
+            if (!termsCheckbox.checked) {
+                termsError.style.display = "block";
+                valid = false;
+            } else {
+                termsError.style.display = "none";
+            }
+
+            if (valid) {
+                alert("Form submitted successfully!");
+                document.getElementById("internship-form").reset();
+            }
+        });
+
+        document.querySelectorAll(".error").forEach(error => {
+            error.style.display = "none";
+        });
+    </script>
 </body>
-
 </html>
